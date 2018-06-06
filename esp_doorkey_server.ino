@@ -3,23 +3,18 @@
 #include <WiFiUdp.h>
 #include <TimeLib.h>
 
-const char* ssid = "Lan_indoor";
-const char* password = "luckys322";
+const char* ssid = "MY_AP";
+const char* password = "password1337322228";
 #define ON   0
 #define OFF  1   // JEBANY RELAY MODULE ACTIVE LOW
-int pinOpen = 14;  // D7
-int pinClose = 12; // D8
+int pinOpen = 14;  // D7    COM pin in door relay module for opening 
+int pinClose = 12; // D8    COM pin in door relay module for closing door 
 
 // Create an instance of the server
-// specify the port to listen on as an argument
 WiFiServer server(80);
 WiFiUDP Udp;
-// NTP-серверы:
+// NTP
 static const char ntpServerName[] = "us.pool.ntp.org";
-//static const char ntpServerName[] = "time.nist.gov";
-//static const char ntpServerName[] = "time-a.timefreq.bldrdoc.gov";
-//static const char ntpServerName[] = "time-b.timefreq.bldrdoc.gov";
-//static const char ntpServerName[] = "time-c.timefreq.bldrdoc.gov";
 const int timeZone = 3;     // Рашка GMT+3
 unsigned int localPort = 8888;  // локальный порт для прослушивания UDP-пакетов
 time_t getNtpTime();
@@ -31,13 +26,13 @@ void setup() {
   Serial.begin(9600);
   delay(10);
 
-  // prepare Dpins
+  // preparing Dpins
  pinMode(pinOpen, OUTPUT);
  pinMode(pinClose, OUTPUT);
  digitalWrite(pinOpen, OFF);
  digitalWrite(pinClose, OFF);
   
-  // Connect to WiFi network
+  // Connecting to WiFi network
   Serial.println();
   Serial.println();
   Serial.print("Connecting to ");
